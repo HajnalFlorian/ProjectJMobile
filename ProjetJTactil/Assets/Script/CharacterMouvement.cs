@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CharacterMouvement : MonoBehaviour
 {
-    private Vector3 startTouchPosition, endTouchPosition, jump;
+    private Vector3 startTouchPosition, endTouchPosition;
     public Vector2 startPos, direction;
+
     Rigidbody rb;
-    float dirX;
-    float speed = 5f;
-    public float jumpForce = 2f;
-    private bool inJump = false;
-    float cpt = 0;
-    float tempsMax = 0.1f;
-    bool allowCpt;
+
+    public float speed = 5f;
+    public float jumpForce = 0.1f;
+
+    private float dirX;
+    private float cpt = 0;
+    private float tempsMax = 0.1f;
+    private bool allowCpt;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+      
     }
 
     // Update is called once per frame
     void Update()
     {
         dirX = Input.acceleration.x * speed;
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -42,77 +47,56 @@ public class CharacterMouvement : MonoBehaviour
                     break;
 
                 case TouchPhase.Ended:
-                    inJump = true;
                     JumpIfAllowed();
                     break;
             }
             
         }
-
-        //Si le compteur est actif, incrémente cpt. 
+        
         if (allowCpt)
         {
             cpt += Time.deltaTime;
-
-            //Si cpt est supérieur au temps max, lance la méthode de jump, 
-            //set inJump à true, reset le compteur et sort de l'incrémentation en settant allowCpt à false;
+            
             if (cpt >= tempsMax)
             {
                 allowCpt = false;
-                inJump = true;
-                JumpIfAllowed();
+                //JumpIfAllowed();
                 cpt = 0;
             }
         }
-        //swipeCheck();
+        
+
         Vector3 forwardMove = transform.forward * speed * Time.fixedDeltaTime;
         Vector3 horizontalMove = transform.right * dirX * speed * Time.fixedDeltaTime;
-        jump = transform.up * jumpForce * Time.deltaTime;   
+        
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
+        
+    }
+    
+
+    private void JumpIfAllowed()
+    {
+        if (isGrounded())
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
+        }
+
     }
 
-    /*private void swipeCheck()
+    private bool isGrounded()
     {
-        /* if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-             startTouchPosition = Input.GetTouch(0).position;
-         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-             endTouchPosition = Input.GetTouch(0).position;
-         if (endTouchPosition.y > startTouchPosition.y && rb.velocity.y == 0)
-             inJump = true;
-        if (Input.touchCount > 0)
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
+        foreach(Collider col in hitColliders)
         {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
+            if(col.tag == "Ground")
             {
-                case TouchPhase.Began:
-                    startPos = touch.position;
-                    break;
-
-                case TouchPhase.Moved:
-                    direction = touch.position - startPos;
-                    break;
-
-                case TouchPhase.Ended:
-                    inJump = true;
-                    break;
-            }
-        }
-    }*/
-        private void JumpIfAllowed()
-        {
-            if (inJump)
-            {
-            rb.MovePosition(rb.position + jump);
-            //rb.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
-                inJump = false;
-
+                return true;
             }
         }
 
-        private void FixedUpdate()
-        {
+        return false;
 
-
-        }
+        
+    }
 }
