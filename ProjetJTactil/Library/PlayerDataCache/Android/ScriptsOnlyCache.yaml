@@ -77,19 +77,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11896}
     - Class: 114
-      Script: {instanceID: 12050}
+      Script: {instanceID: 12042}
     - Class: 114
-      Script: {instanceID: 12102}
+      Script: {instanceID: 12052}
     - Class: 114
-      Script: {instanceID: 12416}
+      Script: {instanceID: 12104}
     - Class: 114
-      Script: {instanceID: 12570}
+      Script: {instanceID: 12418}
     - Class: 114
-      Script: {instanceID: 12710}
+      Script: {instanceID: 12572}
     - Class: 114
-      Script: {instanceID: 13060}
+      Script: {instanceID: 12712}
     - Class: 114
-      Script: {instanceID: 25328}
+      Script: {instanceID: 13062}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -313,7 +313,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 7fe409c8d72ba870316f9c73504a6b52
+      Hash: 07e14b2bbd4a3c71c2f342a84425f7de
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterMouvement
@@ -323,6 +323,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: 6c2dd945f73b89e01555a934bf0d184b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Affichage
   - hash:
       serializedVersion: 2
       Hash: c7faad5ded3055716c4bdef4ad735515
@@ -569,12 +575,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 6c2dd945f73b89e01555a934bf0d184b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Affichage
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
