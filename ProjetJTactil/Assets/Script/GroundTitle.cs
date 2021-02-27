@@ -5,6 +5,7 @@ using UnityEngine;
 public class GroundTitle : MonoBehaviour
 {
     GroundSpawner groundSpawner;
+    public GameObject prefab1, prefab2, prefab3, prefab4;
     // Start is called before the first frame update
     void Start()
     {

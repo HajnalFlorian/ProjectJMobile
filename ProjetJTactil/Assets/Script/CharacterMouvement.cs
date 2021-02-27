@@ -11,7 +11,8 @@ public class CharacterMouvement : MonoBehaviour
 
     Rigidbody rb;
 
-    public float speed = 5f;
+    public float speed = 10f;
+    public float gyroSpeed = 5f;
     public float jumpForce = 0.1f;
 
     private float dirX;
@@ -29,7 +30,7 @@ public class CharacterMouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dirX = Input.acceleration.x * speed;
+        dirX = Input.acceleration.x * gyroSpeed;
 
         if (Input.touchCount > 0)
         {
@@ -70,6 +71,8 @@ public class CharacterMouvement : MonoBehaviour
         Vector3 horizontalMove = transform.right * dirX * speed * Time.fixedDeltaTime;
         
         rb.MovePosition(rb.position + forwardMove + horizontalMove);
+
+        speed += 0.001f;
         
     }
     
