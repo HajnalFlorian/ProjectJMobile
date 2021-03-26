@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class CharacterMouvement : MonoBehaviour
-{
+{       //déclaration variable
     private Vector3 startTouchPosition, endTouchPosition;
     public Vector2 startPos, direction;
 
