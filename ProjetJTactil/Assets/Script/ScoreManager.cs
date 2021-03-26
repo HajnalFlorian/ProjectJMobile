@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,12 @@ public class ScoreManager : MonoBehaviour
     public Text scoreText;
     public Text highScoreText;
 
-    public float scoreCount;
-    public float highScoreCount;
+    public float score = 0.0f;
 
-    public float pointParSec;
+    private int difficultyLevel = 1;
+    private int maxDifficultyLevel = 10;
+    private int scoreToNextLevel = 10;
 
-    public bool scoreInscreasing;
 
 
     // Start is called before the first frame update
@@ -26,8 +27,22 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreCount += pointParSec + Time.deltaTime;
-        scoreText.text = "Score: " + Mathf.Round(scoreCount);
+        if (score >= scoreToNextLevel)
+            levelUp();
+
+        score +=  Time.deltaTime;
+        scoreText.text = "Score: " + Mathf.Round(score);
+
+    }
+
+    private void levelUp()
+    {
+        if (difficultyLevel == maxDifficultyLevel)
+            return;
+
+        scoreToNextLevel *= 2;
+        difficultyLevel++;
+        GetComponent<CharacterMouvement>().setSpeed(difficultyLevel);
 
     }
 }
