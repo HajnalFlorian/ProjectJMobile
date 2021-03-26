@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Obstacle : MonoBehaviour
 {
     private CharacterMouvement playerMouvement;
+    public GameObject Mort;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,10 @@ public class Obstacle : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.name == "Player")
-            playerMouvement.Die();
+        {
+            playerMouvement.Alive = false;
+        }
     }
 }
